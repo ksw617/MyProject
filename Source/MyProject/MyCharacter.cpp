@@ -22,6 +22,7 @@ AMyCharacter::AMyCharacter()
 	
 	SpringArm->TargetArmLength = 400.f;
 	SpringArm->SetRelativeRotation(FRotator(-35.f, 0.f, 0.f));
+	SpringArm->bUsePawnControlRotation = true; // Ãß°¡
 
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> SkeletalMesh(TEXT("/Script/Engine.SkeletalMesh'/Game/ParagonGreystone/Characters/Heroes/Greystone/Meshes/Greystone.Greystone'"));
 
@@ -56,6 +57,10 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 	PlayerInputComponent->BindAxis(TEXT("UpDown"), this, &AMyCharacter::KeyUpDown);
 	PlayerInputComponent->BindAxis(TEXT("LeftRight"), this, &AMyCharacter::KeyLeftRight);
+
+	PlayerInputComponent->BindAxis(TEXT("LookLeftRight"), this, &AMyCharacter::MouseLookLeftRight);
+	PlayerInputComponent->BindAxis(TEXT("LookUpDown"), this, &AMyCharacter::MouseLookUpDown);
+
 }
 
 void AMyCharacter::KeyUpDown(float Value)
@@ -66,4 +71,14 @@ void AMyCharacter::KeyUpDown(float Value)
 void AMyCharacter::KeyLeftRight(float Value)
 {
 	AddMovementInput(GetActorRightVector(), Value);
+}
+
+void AMyCharacter::MouseLookLeftRight(float Value)
+{
+	AddControllerYawInput(Value);
+}
+
+void AMyCharacter::MouseLookUpDown(float Value)
+{
+	AddControllerPitchInput(Value);
 }
