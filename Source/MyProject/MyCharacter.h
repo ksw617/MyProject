@@ -11,19 +11,6 @@ class MYPROJECT_API AMyCharacter : public ACharacter
 {
 	GENERATED_BODY()
 private:
-	UPROPERTY(EditAnywhere)
-	bool a;		//Boolean
-	UPROPERTY(EditAnywhere)
-	int32 b;	//Integer
-	UPROPERTY(EditAnywhere)
-	float c;	//Float
-	UPROPERTY(EditAnywhere)
-	FString d;	//String
-	UPROPERTY(EditAnywhere)
-	FVector e;	//Vector //x,y,z
-	UPROPERTY(EditAnywhere)
-	FRotator f; //Rotator //x:roll, y:pitch, z:yaw
-private:
 	UPROPERTY(VisibleAnywhere)
 	class USpringArmComponent* SpringArm;
 	UPROPERTY(VisibleAnywhere)
