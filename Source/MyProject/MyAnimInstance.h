@@ -32,9 +32,15 @@ private:
 	class AMyCharacter* MyCharacter;
 	UPROPERTY(VisibleAnywhere)
 	class UCharacterMovementComponent* CharacterMovement;
+	UPROPERTY(VisibleAnywhere)
+	UAnimMontage* FireMontage;
 
 public:
-	virtual void NativeInitializeAnimation() override;
+	//생성자에 넣기
+	UMyAnimInstance();
+public:
 	virtual void NativeBeginPlay() override;
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
+public:
+	void PlayFireMontage(); //외부에서 몽타지 play해줄 함수
 };
