@@ -3,11 +3,14 @@
 
 #include "Arrow.h"
 #include "Components/BoxComponent.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 
-// Sets default values
 AArrow::AArrow()
 {
 	PrimaryActorTick.bCanEverTick = true;
+
+	DefaultRoot = CreateDefaultSubobject<USceneComponent>(TEXT("DefaultRoot"));
+	SetRootComponent(DefaultRoot);
 
 	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> StaticMesh(TEXT("/Script/Engine.StaticMesh'/Game/ParagonSparrow/FX/Meshes/Heroes/Sparrow/Abilities/SM_Sparrow_Arrow.SM_Sparrow_Arrow'"));
@@ -15,14 +18,23 @@ AArrow::AArrow()
 	if (StaticMesh.Succeeded())
 	{
 		Mesh->SetStaticMesh(StaticMesh.Object);
+		Mesh->SetupAttachment(DefaultRoot);
 		Mesh->SetRelativeLocationAndRotation(FVector(100.f, 0.f, 0.f), FRotator(90.f, 0.f, 0.f));
+		Mesh->SetCollisionProfileName(TEXT("NoCollision"));
+
+		CollisionMesh = CreateDefaultSubobject<UBoxComponent>(FName("Collison Mesh"));
+		CollisionMesh->SetupAttachment(Mesh);
+		CollisionMesh->SetRelativeLocation(FVector(0.f, 0.f, -55.f));
+		CollisionMesh->SetRelativeScale3D(FVector(0.2f, 0.2f, 0.2f));
+
+		ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(FName("ProjectileMovementComponent"));
+		ProjectileMovementComponent->SetUpdatedComponent(DefaultRoot);
+		ProjectileMovementComponent->InitialSpeed = 3000.f;
+		ProjectileMovementComponent->MaxSpeed = 3000.f;
+		ProjectileMovementComponent->bRotationFollowsVelocity = true;
 	}
 
-	//CollisionMesh = CreateDefaultSubobject<UBoxComponent>(TEXT("Collison Mesh"));
-	CollisionMesh = CreateDefaultSubobject<UBoxComponent>(FName("Collison Mesh"));
-	CollisionMesh->SetupAttachment(Mesh);
-	CollisionMesh->SetRelativeLocation(FVector(0.f, 0.f, -55.f));
-	CollisionMesh->SetRelativeScale3D(FVector(0.2f, 0.2f, 0.2f));
+	
 
 }
 
