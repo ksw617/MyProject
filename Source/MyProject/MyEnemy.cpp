@@ -3,6 +3,7 @@
 
 #include "MyEnemy.h"
 #include "Components/CapsuleComponent.h"
+#include "MyAIController.h"
 
 // Sets default values
 AMyEnemy::AMyEnemy()
@@ -20,6 +21,9 @@ AMyEnemy::AMyEnemy()
 		GetMesh()->SetRelativeLocationAndRotation(FVector(0.f, 0.f, -90.f), FRotator(0.f, -90.f, 0.f));
 
 	}
+
+	AIControllerClass = AMyAIController::StaticClass();
+	
 
 }
 
