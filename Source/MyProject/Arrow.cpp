@@ -29,8 +29,8 @@ AArrow::AArrow()
 
 		ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(FName("ProjectileMovementComponent"));
 		ProjectileMovementComponent->SetUpdatedComponent(DefaultRoot);
-		ProjectileMovementComponent->InitialSpeed = 3000.f;
-		ProjectileMovementComponent->MaxSpeed = 3000.f;
+		ProjectileMovementComponent->InitialSpeed = 5000.f;
+		ProjectileMovementComponent->MaxSpeed = 5000.f;
 		ProjectileMovementComponent->bRotationFollowsVelocity = true;
 	}
 
