@@ -14,6 +14,12 @@ class MYPROJECT_API AMyEnemy : public ACharacter
 private:
 	UPROPERTY(VisibleAnywhere)
 	class UEnemyAnimInstance* EnemyAnimInstance;
+private:
+	bool IsAttacking = false;
+
+public:
+	void SetIsAttacking(bool Value) { IsAttacking = Value; }
+	bool GetIsAttacking() const { return IsAttacking; }
 public:
 	// Sets default values for this character's properties
 	AMyEnemy();
@@ -22,7 +28,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 

@@ -13,10 +13,7 @@ UCLASS()
 class MYPROJECT_API UBTTask_Attack : public UBTTaskNode
 {
 	GENERATED_BODY()
-private:
-	bool IsAttacking = false;
-public:
-	void SetIsAttacking(bool Value) { IsAttacking = Value; }
+
 public:
 	UBTTask_Attack();
 public:

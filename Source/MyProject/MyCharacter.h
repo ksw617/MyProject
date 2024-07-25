@@ -21,6 +21,10 @@ private:
 	class UMyAnimInstance* MyAnimInstance; 
 
 public:
+	UPROPERTY(VisibleAnywhere)
+	class UMyActorComponent* MyActorComponent;
+
+public:
 	AMyCharacter();
 
 protected:
