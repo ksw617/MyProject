@@ -15,7 +15,10 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	class UEnemyAnimInstance* EnemyAnimInstance;
 private:
-	bool IsAttacking = false;
+	bool IsAttacking = false;  
+public:
+		UPROPERTY(VisibleAnywhere)
+		class UMyActorComponent* MyActorComponent;
 
 public:
 	void SetIsAttacking(bool Value) { IsAttacking = Value; }

@@ -5,6 +5,7 @@
 #include "Components/CapsuleComponent.h"
 #include "MyAIController.h"
 #include "EnemyAnimInstance.h"
+#include "MyActorComponent.h"
 
 // Sets default values
 AMyEnemy::AMyEnemy()
@@ -32,7 +33,7 @@ AMyEnemy::AMyEnemy()
 
 	AIControllerClass = AMyAIController::StaticClass();
 	
-
+	MyActorComponent = CreateDefaultSubobject<UMyActorComponent>(FName("MyActorComponent"));
 }
 
 // Called when the game starts or when spawned
