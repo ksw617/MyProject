@@ -4,7 +4,7 @@
 #include "MyEnemy.h"
 #include "Components/CapsuleComponent.h"
 #include "MyAIController.h"
-#include "EnemyAnimInstance.h"
+#include "EnemyAnim.h"
 #include "MyActorComponent.h"
 
 // Sets default values
@@ -41,7 +41,7 @@ void AMyEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
-	EnemyAnimInstance = Cast<UEnemyAnimInstance>(GetMesh()->GetAnimInstance());
+	EnemyAnimInstance = Cast<UEnemyAnim>(GetMesh()->GetAnimInstance());
 	EnemyAnimInstance->OnMontageEnded.AddDynamic(this, &AMyEnemy::OnAttackMontageEnded);
 }
 

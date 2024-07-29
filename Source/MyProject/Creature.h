@@ -12,13 +12,10 @@ class MYPROJECT_API ACreature : public ACharacter
 	GENERATED_BODY()
 
 public:
-	UPROPERTY(VisibleAnywhere)
+	//UPROPERTY(VisibleAnywhere)
 	class UMyActorComponent* MyActorComponent;
 public:
 	// Sets default values for this character's properties
 	ACreature();
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
 
 };

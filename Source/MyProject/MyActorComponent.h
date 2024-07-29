@@ -26,7 +26,6 @@ public:
 public:
 	UMyActorComponent();
 protected:
-	virtual void InitializeComponent() override;
 	virtual void BeginPlay() override;
 public:
 	void SetLevel(int32 Lv);

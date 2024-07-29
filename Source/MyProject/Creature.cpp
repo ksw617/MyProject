@@ -7,15 +7,6 @@
 // Sets default values
 ACreature::ACreature()
 {
-
-}
-
-// Called when the game starts or when spawned
-void ACreature::BeginPlay()
-{
-	Super::BeginPlay();
 	MyActorComponent = CreateDefaultSubobject<UMyActorComponent>(TEXT("MyActorComponent"));
-	UE_LOG(LogTemp, Log, TEXT("Creature::BeginPlay"));
-	
 }
 

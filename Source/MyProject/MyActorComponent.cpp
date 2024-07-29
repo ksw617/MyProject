@@ -2,34 +2,26 @@
 
 
 #include "MyActorComponent.h"
-#include "MyGameInstance.h"	//UMyGameInstance 사용하기 위해
-#include "Kismet/GameplayStatics.h"	 // UGameplayStatics 사용하기 위해
+#include "MyGameInstance.h"
+#include "Kismet/GameplayStatics.h"	
 
-// Sets default values for this component's properties
+
 UMyActorComponent::UMyActorComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
-	bWantsInitializeComponent = true; //InitializeComponent 호출가능
 	Level = 1;
 }
 
-
-void UMyActorComponent::InitializeComponent()
-{
-	Super::InitializeComponent();
-	SetLevel(Level);
-}
 
 // Called when the game starts
 void UMyActorComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
+	SetLevel(Level);
 }
 
 void UMyActorComponent::SetLevel(int32 Lv)
 {
-	//auto MyGameInstance = Cast<UMyGameInstance>(GetWorld()->GetGameInstance());
 	auto MyGameInstance = Cast<UMyGameInstance>(UGameplayStatics::GetGameInstance(GetWorld()));
 	if (MyGameInstance)
 	{

@@ -2,14 +2,15 @@
 
 
 #include "MyAnimInstance.h"
+#include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/KismetMathLibrary.h" 
 
-#include "MyCharacter.h"
 
 
 UMyAnimInstance::UMyAnimInstance()
 {
+	UE_LOG(LogTemp, Log, TEXT("UMyAnimInstance::UMyAnimInstance()"));
 	//생성자에 추가
 	static ConstructorHelpers::FObjectFinder<UAnimMontage> AnimMontage(TEXT("/Script/Engine.AnimMontage'/Game/ParagonSparrow/Characters/Heroes/Sparrow/Animations/Primary_Fire_Med_Montage.Primary_Fire_Med_Montage'"));
 	if (AnimMontage.Succeeded())
@@ -25,11 +26,10 @@ void UMyAnimInstance::NativeBeginPlay()
 
 	if (IsValid(Pawn))
 	{
-		MyCharacter = Cast<AMyCharacter>(Pawn);
-		if (IsValid(MyCharacter))
+		Character = Cast<ACharacter>(Pawn);
+		if (IsValid(Character))
 		{
-			CharacterMovement = MyCharacter->GetCharacterMovement();
-
+			CharacterMovement = Character->GetCharacterMovement();
 		}
 
 	}
@@ -38,17 +38,18 @@ void UMyAnimInstance::NativeBeginPlay()
 void UMyAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeUpdateAnimation(DeltaSeconds);
-	if (IsValid(MyCharacter))
+	if (IsValid(Character))
 	{
+
 		Velocity = CharacterMovement->Velocity;
-		FRotator Rotation = MyCharacter->GetActorRotation();
+		FRotator Rotation = Character->GetActorRotation();
 		Speed = Velocity.Size2D();
 
 		auto Acceleration = CharacterMovement->GetCurrentAcceleration();
 		ShouldMove = Speed > 3.f && Acceleration != FVector::Zero();
 		IsFalling = CharacterMovement->IsFalling();
 
-		AimRotation = MyCharacter->GetBaseAimRotation();
+		AimRotation = Character->GetBaseAimRotation();
 		FRotator VelocityRotation = UKismetMathLibrary::MakeRotFromX(Velocity);
 
 		FRotator DeltaRotation = VelocityRotation - AimRotation;
@@ -59,13 +60,13 @@ void UMyAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		if (ShouldMove || IsFalling)
 		{
 			RotateYaw = FMath::FInterpTo(RotateYaw, 0.f, DeltaSeconds, 20.f);
-			MovingRotation = MyCharacter->GetActorRotation();
+			MovingRotation = Character->GetActorRotation();
 			PrevRotation = MovingRotation;
 		}
 		else
 		{
 			PrevRotation = MovingRotation;
-			MovingRotation = MyCharacter->GetActorRotation();
+			MovingRotation = Character->GetActorRotation();
 			FRotator Delta = MovingRotation - PrevRotation;
 			Delta.Normalize();
 			RotateYaw -= Delta.Yaw;

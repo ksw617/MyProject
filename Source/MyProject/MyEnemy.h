@@ -13,7 +13,7 @@ class MYPROJECT_API AMyEnemy : public ACharacter
 
 private:
 	UPROPERTY(VisibleAnywhere)
-	class UEnemyAnimInstance* EnemyAnimInstance;
+	class UEnemyAnim* EnemyAnimInstance;
 private:
 	bool IsAttacking = false;  
 public:
