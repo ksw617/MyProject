@@ -34,7 +34,7 @@ AMyPlayer::AMyPlayer()
 	}
 	
 
-	static ConstructorHelpers::FClassFinder<UAnimInstance> AnimInstance(TEXT("/Script/Engine.AnimBlueprint'/Game/Animations/ABP_MyCharacter.ABP_MyCharacter_C'"));
+	static ConstructorHelpers::FClassFinder<UAnimInstance> AnimInstance(TEXT("/Script/Engine.AnimBlueprint'/Game/Animations/ABP_Player.ABP_Player_C'"));
 	if (AnimInstance.Succeeded())
 	{
 		GetMesh()->SetAnimClass(AnimInstance.Class);

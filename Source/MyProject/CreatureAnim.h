@@ -33,6 +33,6 @@ public:
 	virtual void NativeBeginPlay() override;
 	virtual void NativeUpdateAnimation(float DeltaSeconds) override;
 public:
-	void PlayAttackMontage();
+	virtual void PlayAttackMontage();
 
 };
